@@ -13,6 +13,9 @@ dist-ssr
 *.local
 .next
 out
+playwright-report
+test-results
+*.tsbuildinfo
 
 # Env files
 .env

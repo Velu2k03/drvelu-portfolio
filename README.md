@@ -1,76 +1,48 @@
-<!-- Updated: Vercel rebuild trigger -->
-# React + TypeScript + Vite
+# Velu Murugan | AI Automation Engineer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Next.js 14 and Tailwind CSS portfolio focused on remote junior and entry-level AI engineering and automation roles.
 
-Currently, two official plugins are available:
+## Run locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Use Node.js 20 or newer. Keep this checkout, downloads, runtime tools, caches, and temporary files on F: on the current workstation.
 
-## React Compiler
-
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```sh
+npm ci
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Validate
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```sh
+npm run lint
+npm run typecheck
+npm run build
+npx playwright install chromium
+npm run test:e2e
 ```
+
+Browser tests start the production server, so build first. They cover desktop/mobile rendering, project links, cross-page navigation, the mobile menu, the current PDF download, and removal of the old PDFs. Screenshots and traces go in the ignored `test-results` directory. An existing test browser can be selected with `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`. On this workstation, set `PLAYWRIGHT_BROWSERS_PATH`, `npm_config_cache`, `TEMP`, and `TMP` to directories on F: before installing or running tooling.
+
+## Content
+
+- `lib/portfolio.ts`: shared profile, four projects, skills, and background.
+- `app/components`: homepage sections, shared with `/about` and `/projects`.
+- `/projects/apps`: redirects to the current project collection.
+- `public/Velu_Murugan_Resume_2026.pdf`: the single resume used by every download link. The prior resume and CV were removed as requested. The supplied PDF is preserved without edits.
+- `public/images/projects`: local project cover images. See [image credits](docs/image-credits.md).
+
+Contact uses a direct email link. The previous form only displayed a success message and had no delivery backend.
+
+The education grade is 88%, following the explicit requested correction from 1.75/5.0. The initial brief also mentioned 98%; confirm that discrepancy before changing this value.
+
+## Design rationale
+
+See [research notes](docs/portfolio-research.md) for the hiring sources and how they informed the content. The page leads with n8n and LLM integrations, then offers inspectable code, concise project descriptions, a video introduction, and direct contact. It avoids unsupported impact metrics and presents independent projects separately from employment.
+
+## Deployment
+
+The existing deployment is Vercel. Use the Next.js preset with `npm run build`. This change does not create or configure a separate hosting service.
+
+## Dependency maintenance
+
+The inherited Next.js 14 dependency tree has npm audit advisories. The rebuild preserves the framework major version; a supported-framework upgrade should be handled separately. Run `npm audit` for current findings rather than treating a successful production build as a security audit.

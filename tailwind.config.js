@@ -7,6 +7,7 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: { accent: '#a74729' },
       fontFamily: {
         sans: ['var(--font-sans)', 'Segoe UI', 'sans-serif'],
         display: ['var(--font-display)', 'var(--font-sans)', 'serif'],

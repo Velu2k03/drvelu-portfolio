@@ -1,173 +1,96 @@
-'use client';
-
-import { motion } from 'framer-motion';
-import { Download, Linkedin, Mail, MapPin, Phone, Send } from 'lucide-react';
-import { useState } from 'react';
+import { ArrowUpRight, Github, Mail, MapPin, Phone, Play } from "lucide-react";
+import { profile } from "../../lib/portfolio";
 
 export function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
-  };
-
   return (
-    <section id="contact" className="py-16 sm:py-20">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.65 }}
-        className="section-wrap text-center mb-14"
-      >
-        <p className="text-xs uppercase tracking-[0.25em] text-slate-500 mb-3">Contact</p>
-        <h2 className="display-title text-3xl sm:text-5xl text-slate-900 mb-4">
-          Let us build something meaningful.
-        </h2>
-        <p className="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto">
-          I&apos;m open to full-stack developer roles, freelance projects, and automation collaborations.
-        </p>
-      </motion.div>
-
-      <div className="section-wrap grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6 }}
-          className="glass-panel rounded-3xl p-6 sm:p-8"
-        >
-          <h3 className="text-xl sm:text-2xl font-semibold text-slate-900 mb-2">Send a message</h3>
-          <p className="text-slate-600 mb-6">I will respond as soon as possible.</p>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <input
-                type="text"
-                placeholder="Your Name"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full rounded-xl border border-slate-200 bg-white/85 px-4 py-3 text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-300"
-                required
-              />
-            </div>
-            <div>
-              <input
-                type="email"
-                placeholder="Your Email"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full rounded-xl border border-slate-200 bg-white/85 px-4 py-3 text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-300"
-                required
-              />
-            </div>
-            <div>
-              <textarea
-                placeholder="Your Message"
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                rows={5}
-                className="w-full rounded-xl border border-slate-200 bg-white/85 px-4 py-3 text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-300 resize-none"
-                required
-              />
-            </div>
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              type="submit"
-              className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-3 font-semibold text-white transition hover:bg-slate-700"
+    <section id="contact" className="section-wrap pb-16 pt-10 sm:pb-20">
+      <div className="rounded-2xl bg-[#252c27] p-7 text-white sm:p-12">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
+          <div>
+            <p className="eyebrow mb-5 text-[#c5d0c1]">05 / Get in touch</p>
+            <h2 className="text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
+              Your next teammate
+              <br />
+              could be here.
+            </h2>
+            <p className="mt-5 max-w-md text-sm leading-6 text-stone-300">
+              {profile.availability}
+            </p>
+            <p className="mt-2 text-sm text-stone-300">
+              Seeking junior and entry-level opportunities.
+            </p>
+            <a
+              href={"mailto:" + profile.email}
+              className="mt-7 inline-flex min-h-[48px] items-center gap-3 rounded-lg bg-[#e0ebd4] px-5 py-3 text-sm font-semibold text-[#252c27] transition hover:bg-white"
             >
-              <Send className="w-4 h-4" />
-              Send Message
-            </motion.button>
-            {submitted && (
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-emerald-600 text-center font-semibold"
+              <Mail size={17} aria-hidden="true" />
+              Email Velu
+              <ArrowUpRight size={17} aria-hidden="true" />
+            </a>
+          </div>
+          <div className="flex flex-col justify-center">
+            <div className="flex flex-col items-start gap-4 text-sm">
+              <a
+                className="text-link break-all"
+                href={"mailto:" + profile.email}
               >
-                Message sent successfully!
-              </motion.p>
-            )}
-          </form>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6 }}
-          className="glass-panel rounded-3xl p-6 sm:p-8 space-y-7"
-        >
-          <h3 className="text-xl sm:text-2xl font-semibold text-slate-900">Direct channels</h3>
-
-          <div className="flex items-start gap-4">
-            <div className="h-11 w-11 rounded-xl bg-sky-100 text-sky-700 grid place-items-center">
-              <Mail className="w-5 h-5" />
-            </div>
-            <div>
-              <h4 className="font-semibold text-slate-900 mb-1">Email</h4>
-              <a href="mailto:velu2k03@gmail.com" className="text-slate-600 hover:text-slate-900 transition-colors">
-                velu2k03@gmail.com
+                <Mail
+                  size={17}
+                  className="shrink-0 text-[#c5d0c1]"
+                  aria-hidden="true"
+                />
+                {profile.email}
               </a>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4">
-            <div className="h-11 w-11 rounded-xl bg-sky-100 text-sky-700 grid place-items-center">
-              <Phone className="w-5 h-5" />
-            </div>
-            <div>
-              <h4 className="font-semibold text-slate-900 mb-1">Phone</h4>
-              <a href="tel:+639691559821" className="text-slate-600 hover:text-slate-900 transition-colors">
-                +63 969 155 9821
+              <a className="text-link" href={profile.phoneHref}>
+                <Phone
+                  size={17}
+                  className="shrink-0 text-[#c5d0c1]"
+                  aria-hidden="true"
+                />
+                {profile.phone}
               </a>
+              <p className="flex items-start gap-2">
+                <MapPin
+                  size={17}
+                  className="mt-0.5 shrink-0 text-[#c5d0c1]"
+                  aria-hidden="true"
+                />
+                <span>
+                  {profile.location}
+                  <span className="mt-1 block text-xs text-stone-300">
+                    Working remotely worldwide
+                  </span>
+                </span>
+              </p>
             </div>
-          </div>
-
-          <div className="flex items-start gap-4">
-            <div className="h-11 w-11 rounded-xl bg-sky-100 text-sky-700 grid place-items-center">
-              <MapPin className="w-5 h-5" />
-            </div>
-            <div>
-              <h4 className="font-semibold text-slate-900 mb-1">Location</h4>
-              <p className="text-slate-600">Santa Rosa City, Laguna, Philippines</p>
-            </div>
-          </div>
-
-          <div className="space-y-3 pt-4">
-            <p className="font-semibold text-slate-900">Quick actions</p>
-            <div className="flex flex-wrap gap-3">
-              <motion.a
-                href="https://www.linkedin.com/in/velu-2k03"
+            <div className="mt-7 grid gap-3 sm:grid-cols-2">
+              <a
+                href={profile.loom}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.2, rotate: 10 }}
-                className="h-11 w-11 rounded-xl border border-slate-200 bg-white/85 grid place-items-center text-slate-700 hover:bg-slate-900 hover:text-white transition"
+                className="flex items-center justify-between gap-2 rounded-lg border border-white/25 p-4 text-sm font-medium transition hover:bg-white/10"
               >
-                <Linkedin className="w-5 h-5" />
-              </motion.a>
-              <motion.a
-                href="mailto:velu2k03@gmail.com"
-                whileHover={{ scale: 1.2, rotate: 10 }}
-                className="h-11 w-11 rounded-xl border border-slate-200 bg-white/85 grid place-items-center text-slate-700 hover:bg-slate-900 hover:text-white transition"
+                <span className="flex items-center gap-2">
+                  <Play size={17} aria-hidden="true" />
+                  Video intro
+                </span>
+                <ArrowUpRight size={16} aria-hidden="true" />
+              </a>
+              <a
+                href={profile.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between gap-2 rounded-lg border border-white/25 p-4 text-sm font-medium transition hover:bg-white/10"
               >
-                <Mail className="w-5 h-5" />
-              </motion.a>
-              <motion.a
-                href="/VELU-NEW-RESUME.pdf"
-                download
-                whileHover={{ scale: 1.2, rotate: 10 }}
-                className="h-11 w-11 rounded-xl border border-slate-200 bg-white/85 grid place-items-center text-slate-700 hover:bg-slate-900 hover:text-white transition"
-              >
-                <Download className="w-5 h-5" />
-              </motion.a>
+                <span className="flex items-center gap-2">
+                  <Github size={17} aria-hidden="true" />
+                  GitHub profile
+                </span>
+                <ArrowUpRight size={16} aria-hidden="true" />
+              </a>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
